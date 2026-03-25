@@ -4,18 +4,26 @@
 :root {
   --cream: #F5F0E8;
   --cream-light: #FAF7F2;
+  --off-white: #FFFFFF;
   --brown-dark: #2C1810;
-  --brown-chocolate: #3A2218;
+  --brown-chocolate: #1F110B;
+  --gold: #C4954A;
+  --gold-light: #D4AF74;
   --terracotta: #A0522D;
-  --terracotta-light: #B8733D;
-  --gold-accent: #C4954A;
-  --text-dark: #1A1A1A;
-  --text-muted: #6B5B4E;
-  --off-white: #FFFDF9;
+  --text-muted: #5C5450;
+  --transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-html {
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
   scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -233,6 +241,8 @@ h1, h2, h3 {
   border: none;
   cursor: pointer;
   padding: 4px;
+  position: relative;
+  z-index: 101;
 }
 .hamburger-bar {
   display: block;
@@ -340,6 +350,8 @@ h1, h2, h3 {
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
+  width: 100vw;
+  text-align: center;
 }
 
 /* ── Services Carousel ── */
@@ -534,6 +546,7 @@ h1, h2, h3 {
   width: 100%;
   max-width: 380px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 .attorneys-photo-card {
   width: 100%;
