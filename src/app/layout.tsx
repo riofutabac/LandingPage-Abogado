@@ -56,9 +56,71 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const entityJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://estudiojuridicoflapo.com/#website",
+        url: "https://estudiojuridicoflapo.com",
+        name: "Estudio Jurídico Dr. Fabián Lapo",
+        inLanguage: "es-EC",
+      },
+      {
+        "@type": "Person",
+        "@id": "https://estudiojuridicoflapo.com/#person",
+        name: "Dr. Fabián Edy Lapo Tandazo",
+        jobTitle: "Abogado",
+        worksFor: {
+          "@id": "https://estudiojuridicoflapo.com/#legalservice",
+        },
+        knowsAbout: [
+          "Derecho Civil",
+          "Derecho Penal",
+          "Derecho de Tránsito",
+          "Niñez y Adolescencia",
+          "Legalización de Tierras",
+          "Trámites Notariales",
+        ],
+      },
+      {
+        "@type": "LegalService",
+        "@id": "https://estudiojuridicoflapo.com/#legalservice",
+        name: "Estudio Jurídico Dr. Fabián Lapo",
+        description:
+          "Estudio jurídico especializado en derecho civil, penal, tránsito, niñez y adolescencia, legalización de tierras y trámites notariales en Santo Domingo, Ecuador.",
+        url: "https://estudiojuridicoflapo.com",
+        image: "https://estudiojuridicoflapo.com/og-image.jpg",
+        telephone: "+593990728407",
+        areaServed: "Ecuador",
+        foundingDate: "2017",
+        founder: {
+          "@id": "https://estudiojuridicoflapo.com/#person",
+        },
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Santo Domingo",
+          addressRegion: "Santo Domingo de los Tsáchilas",
+          addressCountry: "EC",
+        },
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "customer support",
+          telephone: "+593990728407",
+          areaServed: "EC",
+          availableLanguage: ["es"],
+        },
+      },
+    ],
+  };
+
   return (
     <html lang="es" className={`${playfair.variable} ${dmSans.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(entityJsonLd) }}
+        />
         <ScrollRevealInit />
         {children}
       </body>

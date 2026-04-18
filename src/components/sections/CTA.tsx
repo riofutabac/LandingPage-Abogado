@@ -2,25 +2,7 @@
 
 import { useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-
-const faqs = [
-  {
-    q: "¿Cuánto cuesta una consulta con el Dr. Fabián Lapo?",
-    a: "La primera consulta es gratuita. Puedes escribirnos por WhatsApp para coordinar una cita presencial en Santo Domingo o una asesoría en línea.",
-  },
-  {
-    q: "¿Atienden casos fuera de Santo Domingo?",
-    a: "Sí. El Dr. Lapo atiende casos en todo Ecuador, con posibilidad de gestión remota para trámites que no requieren presencia física.",
-  },
-  {
-    q: "¿Cuánto tiempo tarda un juicio de alimentos en Ecuador?",
-    a: "Depende del juzgado y la complejidad del caso. En general, las medidas cautelares pueden obtenerse en días; el proceso completo toma entre 3 a 4 meses, dependiendo del caso.",
-  },
-  {
-    q: "¿Qué debo llevar a la primera cita?",
-    a: "Solo tu cédula de identidad y los documentos que tengas relacionados con el caso (contratos, notificaciones, fotografías, etc.). Si no tienes nada, igual podemos orientarte.",
-  },
-];
+import { faqs } from "@/content/faqs";
 
 export default function CTA() {
   const ref = useScrollReveal<HTMLElement>();
@@ -44,7 +26,7 @@ export default function CTA() {
           {faqs.map((faq, i) => {
             const isOpen = openFaq === i;
             return (
-              <div key={i} className={`reveal delay-${i + 1} faq-item`}>
+              <div key={faq.q} className={`reveal delay-${Math.min(i + 1, 4)} faq-item`}>
                 <button
                   className="faq-question"
                   onClick={() => toggleFaq(i)}
