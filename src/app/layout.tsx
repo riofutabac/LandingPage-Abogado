@@ -16,7 +16,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://fabianlapo.ec"),
+  metadataBase: new URL("https://estudiojuridicoflapo.com"),
   title: {
     default: "Dr. Fabián Lapo | Abogado en Santo Domingo, Ecuador",
     template: "%s | Dr. Fabián Lapo Abogado",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_EC",
-    url: "https://fabianlapo.ec",
+    url: "https://estudiojuridicoflapo.com",
     siteName: "Dr. Fabián Lapo — Abogado",
     title: "Dr. Fabián Lapo | Abogado en Santo Domingo, Ecuador",
     description:
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     images: ["/og-image.jpg"],
   },
   robots: { index: true, follow: true },
-  alternates: { canonical: "https://fabianlapo.ec" },
+  alternates: { canonical: "https://estudiojuridicoflapo.com" },
 };
 
 export default function RootLayout({

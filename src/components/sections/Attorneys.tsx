@@ -5,11 +5,16 @@ import Image from "next/image";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const statCircles = [
-  { percent: 90, label: "Casos\nResueltos", offset: 28.9, posClass: "stat-top-right" },
-  { percent: 98, label: "Clientes\nSatisfechos", offset: 5.78, posClass: "stat-bottom-left" },
+  { value: 9, suffix: "", label: "Años de\nExperiencia", offset: 0, posClass: "stat-top-right" },
+  { value: 100, suffix: "%", label: "Compromiso\nÉtico", offset: 0, posClass: "stat-bottom-left" },
 ];
 
-function StatCircle({ percent, label, offset }: { percent: number; label: string; offset: number }) {
+function StatCircle({
+  value,
+  suffix,
+  label,
+  offset,
+}: Readonly<{ value: number; suffix: string; label: string; offset: number }>) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -33,7 +38,7 @@ function StatCircle({ percent, label, offset }: { percent: number; label: string
         <circle className="stat-bg" cx="50" cy="50" r="46" />
         <circle className="stat-progress" cx="50" cy="50" r="46" />
       </svg>
-      <span className="font-serif stat-percent">{percent}%</span>
+      <span className="font-serif stat-percent">{value}{suffix}</span>
       <span className="stat-label">{label}</span>
     </div>
   );
@@ -88,7 +93,7 @@ export default function Attorneys() {
             <div className="attorneys-photo-card">
               <Image
                 src="/.assets/abogado_portrait.png"
-                alt="Dr. Fabián Lapo — Abogado en Santo Domingo, Ecuador"
+                alt="Dr. Fabián Lapo, Abogado especialista en derecho civil y penal en Santo Domingo, Ecuador"
                 fill
                 style={{ objectFit: "cover", objectPosition: "top center" }}
                 sizes="(max-width: 768px) 90vw, 400px"
@@ -103,7 +108,7 @@ export default function Attorneys() {
             {/* Stat badges overlapping the card */}
             {statCircles.map((c) => (
               <div key={c.label} className={`attorneys-stat-badge ${c.posClass}`}>
-                <StatCircle percent={c.percent} label={c.label} offset={c.offset} />
+                <StatCircle value={c.value} suffix={c.suffix} label={c.label} offset={c.offset} />
               </div>
             ))}
           </div>

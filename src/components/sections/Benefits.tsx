@@ -108,11 +108,14 @@ export default function Benefits() {
           <div className="reveal-right delay-4 benefits-stats">
             {[
               { num: "7+", label: "Áreas del Derecho" },
-              { num: "10+", label: "Años de Experiencia" },
-              { num: "500+", label: "Casos Atendidos" },
+              { num: "Desde", label: "El año 2017" },
+              { num: "100%", label: "Atención Personalizada" },
             ].map((stat) => (
               <div key={stat.label} className="benefits-stat-item">
-                <p className="font-serif benefits-stat-num">
+                <p
+                  className="font-serif benefits-stat-num"
+                  style={stat.num === "Desde" ? { fontSize: "1.5rem" } : {}}
+                >
                   {stat.num}
                 </p>
                 <p className="benefits-stat-label">
