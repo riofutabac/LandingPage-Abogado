@@ -31,13 +31,18 @@ export default function Navbar() {
         className="navbar-hamburger"
         onClick={() => setMenuOpen(!menuOpen)}
         aria-label="Menú"
+        aria-expanded={menuOpen}
+        aria-controls="navbar-nav"
       >
         <span className={`hamburger-bar ${menuOpen ? "hamburger-bar--open" : ""}`} />
         <span className={`hamburger-bar ${menuOpen ? "hamburger-bar--open" : ""}`} />
         <span className={`hamburger-bar ${menuOpen ? "hamburger-bar--open" : ""}`} />
       </button>
 
-      <nav className={`navbar-nav ${menuOpen ? "navbar-nav--open" : ""}`}>
+      <nav
+        id="navbar-nav"
+        className={`navbar-nav ${menuOpen ? "navbar-nav--open" : ""}`}
+      >
         {links.map((l) => (
           <a
             key={l.href}

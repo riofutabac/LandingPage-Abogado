@@ -41,13 +41,11 @@ export const metadata: Metadata = {
     title: "Dr. Fabián Lapo | Abogado en Santo Domingo, Ecuador",
     description:
       "Especialista en derecho civil, penal, tránsito, niñez, tierras y asesoría jurídica integral en Ecuador.",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Dr. Fabián Lapo Abogado" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Dr. Fabián Lapo | Abogado Santo Domingo Ecuador",
     description: "Asesoría jurídica integral en Ecuador. Consulta gratis.",
-    images: ["/og-image.jpg"],
   },
   robots: { index: true, follow: true },
   alternates: { canonical: "https://estudiojuridicoflapo.com" },
@@ -121,6 +119,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(entityJsonLd) }}
         />
+        <a href="#main-content" className="skip-link">
+          Saltar al contenido principal
+        </a>
         <ScrollRevealInit />
         {children}
       </body>

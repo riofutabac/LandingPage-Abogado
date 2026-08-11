@@ -27,15 +27,15 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <main>
-        <Navbar />
+      <Navbar />
+      <main id="main-content">
         <Hero />
         <Services />
         <Attorneys />
         <Benefits />
         <Cta />
-        <Footer />
       </main>
+      <Footer />
     </>
   );
 }

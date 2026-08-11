@@ -2,11 +2,13 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+
+const FOUNDING_YEAR = 2017;
+const yearsExperience = new Date().getFullYear() - FOUNDING_YEAR;
 
 const statCircles = [
-  { value: 9, suffix: "", label: "Años de\nExperiencia", offset: 0, posClass: "stat-top-right" },
-  { value: 100, suffix: "%", label: "Compromiso\nÉtico", offset: 0, posClass: "stat-bottom-left" },
+  { value: yearsExperience, suffix: "+", label: "Años de\nExperiencia", offset: 0, posClass: "stat-top-right" },
+  { value: 7, suffix: "+", label: "Áreas del\nDerecho", offset: 0, posClass: "stat-bottom-left" },
 ];
 
 function StatCircle({
@@ -45,10 +47,8 @@ function StatCircle({
 }
 
 export default function Attorneys() {
-  const ref = useScrollReveal<HTMLElement>();
-
   return (
-    <section ref={ref} id="attorneys" className="attorneys-section">
+    <section id="attorneys" className="attorneys-section">
       <h2 className="reveal font-serif section-title" style={{ textAlign: "center", marginBottom: "60px" }}>
         Abogado Verificado<br />y de Confianza
       </h2>
@@ -64,9 +64,9 @@ export default function Attorneys() {
             <span>Abogado Colegiado · Verificado</span>
           </div>
 
-          <h4 className="reveal-left font-serif attorneys-subtitle">
+          <h3 className="reveal-left font-serif attorneys-subtitle">
             Abogado Principal · Colegiado
-          </h4>
+          </h3>
           <p className="reveal-left delay-1 font-serif attorneys-name">
             Dr. Fabián Edy<br />Lapo Tandazo
           </p>
@@ -92,7 +92,7 @@ export default function Attorneys() {
           <div className="attorneys-card-wrapper">
             <div className="attorneys-photo-card">
               <Image
-                src="/.assets/abogado_portrait.png"
+                src="/.assets/abogado_portrait.webp"
                 alt="Dr. Fabián Lapo, Abogado especialista en derecho civil y penal en Santo Domingo, Ecuador"
                 fill
                 style={{ objectFit: "cover", objectPosition: "top center" }}

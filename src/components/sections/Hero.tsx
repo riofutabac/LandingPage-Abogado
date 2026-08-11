@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 export default function Hero() {
   const statueRef = useRef<HTMLDivElement>(null);
@@ -76,11 +77,14 @@ export default function Hero() {
 
         {/* Right — Large statue image, transparent PNG */}
         <div ref={statueRef} className="hero-statue">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/.assets/estatuaJusticia.png?v=2"
+          <Image
+            src="/.assets/estatuaJusticia.webp"
             alt="Estatua de la Justicia del estudio jurídico del Dr. Fabián Lapo en Santo Domingo, Ecuador"
             className="hero-statue-img"
+            width={986}
+            height={1536}
+            priority
+            sizes="(max-width: 1024px) 60vw, 640px"
           />
         </div>
       </div>

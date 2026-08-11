@@ -1,11 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { faqs } from "@/content/faqs";
 
 export default function CTA() {
-  const ref = useScrollReveal<HTMLElement>();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const toggleFaq = (index: number) => {
@@ -13,7 +11,7 @@ export default function CTA() {
   };
 
   return (
-    <section ref={ref} id="cta" className="cta-section">
+    <section id="cta" className="cta-section">
       {/* FAQ block */}
       <div className="faq-container">
         <p className="reveal eyebrow" style={{ textAlign: "center" }}>
@@ -28,9 +26,11 @@ export default function CTA() {
             return (
               <div key={faq.q} className={`reveal delay-${Math.min(i + 1, 4)} faq-item`}>
                 <button
+                  id={`faq-question-${i}`}
                   className="faq-question"
                   onClick={() => toggleFaq(i)}
                   aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${i}`}
                   type="button"
                 >
                   <span className="font-serif faq-question-text">{faq.q}</span>
@@ -53,14 +53,10 @@ export default function CTA() {
                   </svg>
                 </button>
                 <div
-                  className="faq-answer-wrapper"
-                  style={{
-                    maxHeight: isOpen ? "300px" : "0px",
-                    opacity: isOpen ? 1 : 0,
-                    paddingBottom: isOpen ? "20px" : "0px",
-                    overflow: "hidden",
-                    transition: "max-height 0.4s ease, opacity 0.3s ease, padding-bottom 0.4s ease",
-                  }}
+                  id={`faq-answer-${i}`}
+                  role="region"
+                  aria-labelledby={`faq-question-${i}`}
+                  className={`faq-answer-wrapper ${isOpen ? "faq-answer-wrapper--open" : ""}`}
                 >
                   <p className="faq-answer-text">{faq.a}</p>
                 </div>

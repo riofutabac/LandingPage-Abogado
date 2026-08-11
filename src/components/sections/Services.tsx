@@ -1,8 +1,5 @@
 "use client";
 
-import { useRef, useEffect, useState, useCallback } from "react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
-
 /* ── SVG Icons ── */
 const ScaleIcon = () => (
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -61,116 +58,8 @@ const areas = [
 ];
 
 export default function Services() {
-  const sectionRef = useScrollReveal<HTMLElement>();
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [isPaused, setIsPaused] = useState(false);
-  const animRef = useRef<number>(0);
-  const posRef = useRef(0);
-  const speedRef = useRef(0.5);
-
-  // Duplicate items for infinite loop
-  const items = [...areas, ...areas, ...areas];
-  const CARD_WIDTH = 300;
-  const GAP = 24;
-  const CARD_TOTAL = CARD_WIDTH + GAP;
-
-  const animate = useCallback(() => {
-    if (!trackRef.current) return;
-
-    if (!isPaused) {
-      posRef.current -= speedRef.current;
-
-      // Reset position for seamless loop
-      const totalWidth = areas.length * CARD_TOTAL;
-      if (Math.abs(posRef.current) >= totalWidth) {
-        posRef.current += totalWidth;
-      }
-
-      trackRef.current.style.transform = `translateX(${posRef.current}px)`;
-    }
-    animRef.current = requestAnimationFrame(animate);
-  }, [isPaused, CARD_TOTAL]);
-
-  useEffect(() => {
-    animRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animRef.current);
-  }, [animate]);
-
-  // Arrow click — jump one full card width with smooth animation
-  const scrollCarousel = (dir: number) => {
-    if (!trackRef.current) return;
-    setIsPaused(true);
-
-    const target = posRef.current + dir * CARD_TOTAL * 2; // 2 cards per click for speed
-    const startPos = posRef.current;
-    const startTime = performance.now();
-    const duration = 400;
-
-    const animateScroll = (now: number) => {
-      const elapsed = now - startTime;
-      const t = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
-      posRef.current = startPos + (target - startPos) * eased;
-
-      if (trackRef.current) {
-        trackRef.current.style.transform = `translateX(${posRef.current}px)`;
-      }
-
-      if (t < 1) {
-        requestAnimationFrame(animateScroll);
-      } else {
-        setIsPaused(false);
-      }
-    };
-    requestAnimationFrame(animateScroll);
-  };
-
-  // Mouse drag support
-  const isDragging = useRef(false);
-  const dragStartX = useRef(0);
-  const dragStartPos = useRef(0);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    isDragging.current = true;
-    dragStartX.current = e.clientX;
-    dragStartPos.current = posRef.current;
-    setIsPaused(true);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging.current || !trackRef.current) return;
-    const diff = e.clientX - dragStartX.current;
-    posRef.current = dragStartPos.current + diff;
-    trackRef.current.style.transform = `translateX(${posRef.current}px)`;
-  };
-
-  const handleMouseUp = () => {
-    isDragging.current = false;
-    setIsPaused(false);
-  };
-
-  // Touch/swipe support
-  const touchStartX = useRef(0);
-  const touchStartPos = useRef(0);
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setIsPaused(true);
-    touchStartX.current = e.touches[0].clientX;
-    touchStartPos.current = posRef.current;
-  };
-  const handleTouchMove = (e: React.TouchEvent) => {
-    const diff = e.touches[0].clientX - touchStartX.current;
-    posRef.current = touchStartPos.current + diff;
-    if (trackRef.current) {
-      trackRef.current.style.transform = `translateX(${posRef.current}px)`;
-    }
-  };
-  const handleTouchEnd = () => {
-    setIsPaused(false);
-  };
-
   return (
-    <section ref={sectionRef} id="services" className="services-section">
+    <section id="services" className="services-section">
       {/* Header */}
       <div className="services-header">
         <p className="reveal eyebrow">Áreas de Práctica</p>
@@ -183,57 +72,21 @@ export default function Services() {
         </p>
       </div>
 
-      {/* Carousel */}
-      <div className="reveal delay-3 carousel-wrapper">
-        {/* Arrow Left */}
-        <button
-          className="carousel-arrow carousel-arrow--left"
-          onClick={() => scrollCarousel(1)}
-          aria-label="Anterior"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-        </button>
-
-        {/* Track */}
-        <div
-          className="carousel-viewport"
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={() => { isDragging.current = false; setIsPaused(false); }}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-        >
-          <div ref={trackRef} className="carousel-track">
-            {items.map((area, i) => {
-              const Icon = iconMap[area.key];
-              return (
-                <div key={`${area.key}-${i}`} className="carousel-card">
-                  <div className="service-icon">
-                    <Icon />
-                  </div>
-                  <h3 className="font-serif service-card-title">{area.title}</h3>
-                  <p className="service-card-subtitle">{area.subtitle}</p>
-                  <p className="service-card-desc">{area.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Arrow Right */}
-        <button
-          className="carousel-arrow carousel-arrow--right"
-          onClick={() => scrollCarousel(-1)}
-          aria-label="Siguiente"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
-        </button>
+      {/* Grid */}
+      <div className="reveal delay-3 services-grid">
+        {areas.map((area) => {
+          const Icon = iconMap[area.key];
+          return (
+            <div key={area.key} className="service-card">
+              <div className="service-icon">
+                <Icon />
+              </div>
+              <h3 className="font-serif service-card-title">{area.title}</h3>
+              <p className="service-card-subtitle">{area.subtitle}</p>
+              <p className="service-card-desc">{area.description}</p>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

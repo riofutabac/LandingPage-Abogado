@@ -1,6 +1,7 @@
 "use client";
 
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+const FOUNDING_YEAR = 2017;
+const yearsExperience = new Date().getFullYear() - FOUNDING_YEAR;
 
 const benefitItems = [
   {
@@ -46,10 +47,8 @@ const BenefitIcon = ({ type }: { type: string }) => {
 };
 
 export default function Benefits() {
-  const ref = useScrollReveal<HTMLElement>();
-
   return (
-    <section ref={ref} id="benefits" className="benefits-section">
+    <section id="benefits" className="benefits-section">
       <div className="benefits-grid">
         {/* Left */}
         <div className="benefits-left">
@@ -108,14 +107,11 @@ export default function Benefits() {
           <div className="reveal-right delay-4 benefits-stats">
             {[
               { num: "7+", label: "Áreas del Derecho" },
-              { num: "Desde", label: "El año 2017" },
-              { num: "100%", label: "Atención Personalizada" },
+              { num: `${yearsExperience}+`, label: "Años en Ejercicio" },
+              { num: "2017", label: "Año de Fundación" },
             ].map((stat) => (
               <div key={stat.label} className="benefits-stat-item">
-                <p
-                  className="font-serif benefits-stat-num"
-                  style={stat.num === "Desde" ? { fontSize: "1.5rem" } : {}}
-                >
+                <p className="font-serif benefits-stat-num">
                   {stat.num}
                 </p>
                 <p className="benefits-stat-label">
