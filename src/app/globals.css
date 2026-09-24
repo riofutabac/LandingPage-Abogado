@@ -329,6 +329,23 @@ h1, h2, h3 {
   outline: 2px solid var(--terracotta);
   outline-offset: 3px;
 }
+.hero-watermark {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(3rem, 10vw, 9rem);
+  font-weight: 900;
+  color: rgba(44,24,16,.04);
+  text-transform: uppercase;
+  letter-spacing: 15px;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  width: 100vw;
+  text-align: center;
+}
+
 .hero-trust {
   display: flex;
   align-items: center;

@@ -89,6 +89,11 @@ export default function Hero() {
           />
         </div>
       </div>
+
+      {/* Background watermark */}
+      <div className="hero-watermark font-serif" aria-hidden="true">
+        ABOGADO
+      </div>
     </section>
   );
 }
