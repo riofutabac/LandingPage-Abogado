@@ -1,27 +1,37 @@
+import { FOUNDING_YEAR } from "@/content/contact";
+
 export type FaqItem = {
   q: string;
   a: string;
 };
 
-export const faqs: FaqItem[] = [
+export const faqs: readonly FaqItem[] = [
   {
-    q: "¿Cuánto cuesta una consulta con el Dr. Fabián Lapo?",
-    a: "La primera consulta es gratuita. Puedes escribirnos por WhatsApp para coordinar una cita presencial en Santo Domingo o una asesoría en línea.",
+    q: "¿Cómo agendo una consulta?",
+    a: "Escríbele al Dr. Lapo por WhatsApp o llámalo. La consulta puede ser presencial en su estudio de Santo Domingo o en línea, en el horario que acuerden según su disponibilidad.",
   },
   {
-    q: "¿Qué áreas legales maneja el Dr. Fabián Lapo?",
-    a: "El Dr. Fabián Lapo tiene experiencia desde 2017 resolviendo casos de derecho civil, penal, tránsito, niñez y adolescencia, legalización de tierras y trámites notariales en Santo Domingo y a nivel nacional.",
+    q: "¿Cuánto cobra el Dr. Lapo?",
+    a: "Los honorarios dependen del tipo de caso y de su complejidad. En la consulta el Dr. Lapo revisa tu situación y te explica con claridad los honorarios y los plazos estimados antes de empezar.",
   },
   {
-    q: "¿Atienden casos fuera de Santo Domingo?",
-    a: "Sí. El Dr. Lapo atiende casos en todo Ecuador, con posibilidad de gestión remota para trámites que no requieren presencia física.",
+    q: "¿Mi consulta es confidencial?",
+    a: "Sí. Todo lo que le cuentes al Dr. Lapo está protegido por el secreto profesional del abogado, así que puedes explicarle tu situación con tranquilidad.",
   },
   {
-    q: "¿Cuánto tiempo tarda un juicio de alimentos en Ecuador?",
-    a: "Depende del juzgado y la complejidad del caso. En general, las medidas cautelares pueden obtenerse en días; el proceso completo puede tomar entre 3 y 4 meses.",
+    q: "¿Qué áreas legales atiende el Dr. Lapo?",
+    a: `Derecho civil, penal, de tránsito, de niñez y adolescencia, legalización de tierras y trámites notariales. Ejerce desde ${FOUNDING_YEAR} en Santo Domingo.`,
+  },
+  {
+    q: "¿Atiende casos fuera de Santo Domingo?",
+    a: "Sí, el Dr. Lapo atiende casos en todo Ecuador. Los trámites que no requieren presencia física pueden gestionarse en línea.",
+  },
+  {
+    q: "¿Cuánto tarda un juicio de alimentos en Ecuador?",
+    a: "Depende de cada caso: del juzgado, de la complejidad y de cómo avance el proceso. En la consulta, el Dr. Lapo revisa tu situación y te explica qué esperar.",
   },
   {
     q: "¿Qué debo llevar a la primera cita?",
-    a: "Tu cédula de identidad y todos los documentos relacionados con el caso (contratos, notificaciones, fotografías u otros respaldos). Si no cuentas con documentos, igual podemos orientarte.",
+    a: "Tu cédula y los documentos relacionados con el caso: contratos, notificaciones, fotografías u otros respaldos. Si no tienes documentos, igual puede orientarte.",
   },
 ];

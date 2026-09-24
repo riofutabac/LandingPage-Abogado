@@ -1,7 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 import ScrollRevealInit from "@/components/ui/ScrollRevealInit";
+import {
+  EMAIL,
+  FOUNDING_YEAR,
+  MAPS_URL,
+  OFFICE_GEO,
+  PHONE_E164,
+  OFFICE_POSTAL_CODE,
+  OFFICE_STREET,
+} from "@/content/contact";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -22,7 +31,7 @@ export const metadata: Metadata = {
     template: "%s | Dr. Fabián Lapo Abogado",
   },
   description:
-    "Abogado especialista en derecho civil, penal, tránsito, niñez y adolescencia, tierras y asesoría jurídica en Santo Domingo, Ecuador. Consulta gratis.",
+    "Abogado especialista en derecho civil, penal, tránsito, niñez y adolescencia, tierras y asesoría jurídica en Santo Domingo, Ecuador.",
   keywords: [
     "abogado santo domingo ecuador",
     "abogado civil santo domingo",
@@ -45,10 +54,15 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Dr. Fabián Lapo | Abogado Santo Domingo Ecuador",
-    description: "Asesoría jurídica integral en Ecuador. Consulta gratis.",
+    description: "Asesoría jurídica integral en Santo Domingo y todo Ecuador.",
   },
   robots: { index: true, follow: true },
   alternates: { canonical: "https://estudiojuridicoflapo.com" },
+};
+
+export const viewport: Viewport = {
+  colorScheme: "light",
+  themeColor: "#F5F0E8",
 };
 
 export default function RootLayout({
@@ -89,22 +103,32 @@ export default function RootLayout({
           "Estudio jurídico especializado en derecho civil, penal, tránsito, niñez y adolescencia, legalización de tierras y trámites notariales en Santo Domingo, Ecuador.",
         url: "https://estudiojuridicoflapo.com",
         image: "https://estudiojuridicoflapo.com/og-image.jpg",
-        telephone: "+593990728407",
+        telephone: PHONE_E164,
+        email: EMAIL,
         areaServed: "Ecuador",
-        foundingDate: "2017",
+        foundingDate: String(FOUNDING_YEAR),
         founder: {
           "@id": "https://estudiojuridicoflapo.com/#person",
         },
         address: {
           "@type": "PostalAddress",
+          streetAddress: OFFICE_STREET,
+          postalCode: OFFICE_POSTAL_CODE,
           addressLocality: "Santo Domingo",
           addressRegion: "Santo Domingo de los Tsáchilas",
           addressCountry: "EC",
         },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: OFFICE_GEO.latitude,
+          longitude: OFFICE_GEO.longitude,
+        },
+        hasMap: MAPS_URL,
         contactPoint: {
           "@type": "ContactPoint",
           contactType: "customer support",
-          telephone: "+593990728407",
+          telephone: PHONE_E164,
+          email: EMAIL,
           areaServed: "EC",
           availableLanguage: ["es"],
         },

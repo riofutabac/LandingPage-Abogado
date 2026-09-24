@@ -1,125 +1,69 @@
-"use client";
+type ProcessStep = {
+  title: string;
+  description: string;
+};
 
-const FOUNDING_YEAR = 2017;
-const yearsExperience = new Date().getFullYear() - FOUNDING_YEAR;
-
-const benefitItems = [
+const processSteps: readonly ProcessStep[] = [
   {
-    icon: "experience",
-    title: "Representación Legal Sólida",
+    title: "Le escribes",
     description:
-      "Defensa técnica y estratégica en cada etapa del proceso judicial. Conocemos los juzgados y tribunales de Santo Domingo y del Ecuador.",
+      "Por WhatsApp o por teléfono. Cuéntale en pocas palabras qué está pasando.",
   },
   {
-    icon: "clarity",
-    title: "Claridad sin Tecnicismos",
+    title: "Consulta inicial",
     description:
-      "Te explicamos tu caso paso a paso, en palabras claras. Cuentas claras desde el primer contacto: honorarios, plazos y probabilidades reales.",
+      "Presencial en su estudio de Santo Domingo o en línea, según su disponibilidad. Revisa tu situación y te explica tus opciones en palabras claras.",
   },
   {
-    icon: "support",
-    title: "Acompañamiento Permanente",
+    title: "Propuesta clara",
     description:
-      "Estamos contigo en cada audiencia, diligencia y trámite. No te dejamos solo frente al sistema judicial ecuatoriano.",
+      "Conoces los honorarios y los plazos estimados antes de empezar. Tú decides si continúas.",
+  },
+  {
+    title: "Seguimiento en cada etapa",
+    description:
+      "Te mantiene al tanto de cómo avanza tu caso en cada audiencia, diligencia y trámite.",
   },
 ];
 
-const BenefitIcon = ({ type }: { type: string }) => {
-  if (type === "experience") {
-    return (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      </svg>
-    );
-  }
-  if (type === "clarity") {
-    return (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" />
-      </svg>
-    );
-  }
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
-    </svg>
-  );
-};
-
 export default function Benefits() {
   return (
-    <section id="benefits" className="benefits-section">
+    <section id="benefits" className="benefits-section" aria-labelledby="benefits-title">
       <div className="benefits-grid">
-        {/* Left */}
         <div className="benefits-left">
-          <p className="reveal eyebrow" style={{ color: "var(--gold-accent)" }}>
-            Por qué elegirnos
-          </p>
-          <h2 className="reveal delay-1 font-serif section-title" style={{ color: "var(--cream)" }}>
-            Experiencia,<br />Claridad y<br />Acompañamiento
+          <h2 id="benefits-title" className="reveal font-serif section-title benefits-title">
+            Antes de empezar sabrás cuánto cuesta, cuánto puede tardar y qué
+            opciones reales tienes.
           </h2>
-          <p className="reveal delay-2 benefits-desc">
-            El Dr. Fabián Lapo combina experiencia en el derecho ecuatoriano con un
-            trato cercano. Tu problema legal tiene solución — te ayudamos a encontrarla.
+          <p className="reveal delay-1 benefits-desc">
+            El Dr. Fabián Lapo te explica tu situación sin tecnicismos, para que
+            decidas con toda la información sobre la mesa.
           </p>
-
-          {/* Professional initials card */}
-          <div className="reveal delay-3 benefits-attorney-card">
-            <div className="benefits-initials">
-              <span className="font-serif">FL</span>
-            </div>
-            <div>
-              <p className="font-serif benefits-attorney-name">Dr. Fabián Lapo</p>
-              <p className="benefits-attorney-role">Abogado Principal</p>
-            </div>
-          </div>
-
-          <a href="#cta" className="reveal delay-4 btn-outline-light">
-            Contactar Ahora
+          <a href="#cta" className="reveal delay-2 benefits-cta">
+            Agendar una consulta
           </a>
         </div>
 
-        {/* Right */}
         <div className="benefits-right">
-          {benefitItems.map((item, i) => (
-            <div
-              key={item.title}
-              className={`reveal-right delay-${i + 1} benefits-item`}
-              style={{
-                borderBottom: i < benefitItems.length - 1 ? "1px solid rgba(245,240,232,.1)" : "none",
-              }}
-            >
-              <div className="benefits-item-header">
-                <div className="benefits-item-icon">
-                  <BenefitIcon type={item.icon} />
+          <h3 className="reveal-right font-serif benefits-steps-title">
+            Cómo trabaja el Dr. Lapo
+          </h3>
+          <ol className="benefits-steps">
+            {processSteps.map((step, i) => (
+              <li
+                key={step.title}
+                className={`reveal-right delay-${Math.min(i + 1, 4)} benefits-step`}
+              >
+                <span className="font-serif benefits-step-num" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <div>
+                  <p className="font-serif benefits-step-title">{step.title}</p>
+                  <p className="benefits-step-desc">{step.description}</p>
                 </div>
-                <h3 className="font-serif benefits-item-title">
-                  {item.title}
-                </h3>
-              </div>
-              <p className="benefits-item-desc">
-                {item.description}
-              </p>
-            </div>
-          ))}
-
-          {/* Stats row */}
-          <div className="reveal-right delay-4 benefits-stats">
-            {[
-              { num: "7+", label: "Áreas del Derecho" },
-              { num: `${yearsExperience}+`, label: "Años en Ejercicio" },
-              { num: "2017", label: "Año de Fundación" },
-            ].map((stat) => (
-              <div key={stat.label} className="benefits-stat-item">
-                <p className="font-serif benefits-stat-num">
-                  {stat.num}
-                </p>
-                <p className="benefits-stat-label">
-                  {stat.label}
-                </p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </div>
     </section>

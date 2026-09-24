@@ -3,6 +3,7 @@ import Hero from "@/components/sections/Hero";
 import Services from "@/components/sections/Services";
 import Attorneys from "@/components/sections/Attorneys";
 import Benefits from "@/components/sections/Benefits";
+import Testimonials from "@/components/sections/Testimonials";
 import Cta from "@/components/sections/CTA";
 import Footer from "@/components/layout/Footer";
 import { faqs } from "@/content/faqs";
@@ -33,6 +34,7 @@ export default function Home() {
         <Services />
         <Attorneys />
         <Benefits />
+        <Testimonials />
         <Cta />
       </main>
       <Footer />
